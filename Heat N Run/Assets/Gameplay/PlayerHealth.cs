@@ -23,9 +23,6 @@ public void TakeDamage(int amount)
     }
 }
 
-
-
-
     void Update()
     {
         
