@@ -22,7 +22,6 @@ public class MonsterMovement : MonoBehaviour
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        Debug.Log("Distance to player: " + distanceToPlayer);
 
         if (isChasing)
         {
@@ -39,7 +38,6 @@ public class MonsterMovement : MonoBehaviour
             if (distanceToPlayer < chaseDistance)
             {
                 isChasing = true;
-                Debug.Log("Started chasing the player.");
             }
             else
             {
