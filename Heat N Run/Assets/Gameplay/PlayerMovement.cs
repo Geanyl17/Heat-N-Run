@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 40f;
     float horizontalMove = 0f;
     bool jump = false;
+	int CurrentWeaponNo = 0;
+    
 
     void Update()
     {
@@ -21,13 +24,36 @@ public class PlayerMovement : MonoBehaviour
        {
             jump = true;
        }
-    }
+
+       if(Input.GetKeyDown(KeyCode.C))
+       {
+        ChangeWeapon();
+       }
+    } 
 
     void FixedUpdate ()
     {
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
+
+    	void ChangeWeapon()
+	{
+		if(CurrentWeaponNo == 0) 
+		{
+			CurrentWeaponNo += 1;
+			animator.SetLayerWeight(CurrentWeaponNo - 1, 0);
+			animator.SetLayerWeight(CurrentWeaponNo, 1);
+		}
+		else
+		{
+			CurrentWeaponNo -= 1;
+			animator.SetLayerWeight(CurrentWeaponNo + 1, 0);
+			animator.SetLayerWeight(CurrentWeaponNo, 0);
+		}
+			
+	}
+
 
 }
 

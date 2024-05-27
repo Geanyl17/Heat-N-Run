@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,6 +19,9 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+
+	public Animator animator;
+	int CurrentWeaponNo = 0;
 
 	[Header("Events")]
 	[Space]
@@ -143,4 +147,29 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+	void ChangeWeapon()
+	{
+		if(CurrentWeaponNo == 0) 
+		{
+			CurrentWeaponNo += 1;
+			animator.SetLayerWeight(CurrentWeaponNo - 1, 0);
+			animator.SetLayerWeight(CurrentWeaponNo, 1);
+		}
+		else
+		{
+			CurrentWeaponNo -= 1;
+			animator.SetLayerWeight(CurrentWeaponNo + 1, 0);
+			animator.SetLayerWeight(CurrentWeaponNo, 0);
+		}
+			
+	}
+
+
+
+
+
+
+
+
+
 }
