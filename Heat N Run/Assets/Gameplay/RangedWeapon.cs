@@ -17,7 +17,7 @@ public class RangedWeapon : Weapon
 
     void Update()
     {
-        if (weaponManager.GetActiveWeapon() == this && Input.GetButtonDown("Fire1"))
+        if (weaponManager.GetActiveWeapon() == this && Input.GetKeyDown(KeyCode.Return))
         {
             Use();
         }

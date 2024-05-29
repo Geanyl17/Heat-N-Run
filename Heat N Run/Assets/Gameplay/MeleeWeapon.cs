@@ -14,7 +14,7 @@ public class MeleeWeapon : Weapon
 
     void Update()
     {
-        if (Time.time >= nextAttackTime && Input.GetMouseButtonDown(0))
+        if (Time.time >= nextAttackTime && Input.GetKeyDown(KeyCode.Return))
         {
             Use();
             nextAttackTime = Time.time + 1f / attackRate;

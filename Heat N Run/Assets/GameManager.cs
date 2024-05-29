@@ -7,25 +7,17 @@ public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
 
-    private void Start()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void Update()
+        private void Update()
     {
         if (gameOverUI != null)
         {
             if (gameOverUI.activeInHierarchy)
             {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                // Removed cursor lock and visibility settings
             }
             else
             {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
+                // Removed cursor lock and visibility settings
             }
         }
     }
