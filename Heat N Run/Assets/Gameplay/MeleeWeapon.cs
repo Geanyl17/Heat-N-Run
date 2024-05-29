@@ -8,7 +8,7 @@ public class MeleeWeapon : Weapon
     public float attackRange = 0.5f;
     public float attackRate = 2f;
     float nextAttackTime = 0f;
-    public LayerMask enemyLayers;
+    public LayerMask obstacleLayers;
 
     public Animator animator;
 
@@ -27,12 +27,14 @@ public class MeleeWeapon : Weapon
         {
             animator.SetTrigger("Attack");
         }
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach (Collider2D enemy in hitEnemies)
+        
+        Collider2D[] hitObstacles = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, obstacleLayers);
+        foreach (Collider2D obstacle in hitObstacles)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(30);
+            obstacle.GetComponent<ObstacleHealth>().TakeDamage(30);
         }
+    
+    
     }
 
     void OnDrawGizmosSelected()

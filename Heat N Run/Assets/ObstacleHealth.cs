@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class ObstacleHealth : MonoBehaviour
 {
     public Animator animator;
     public int maxHealth = 100;
@@ -17,8 +17,6 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
 
-        animator.SetTrigger("Hurt");
-
         if(currentHealth <= 0)
         {
             Die();
@@ -27,7 +25,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Enemy Died!");
+        Debug.Log("ObstacleBroken");
 
         animator.SetBool("isDead", true);
         

@@ -21,6 +21,12 @@ public class MonsterMovement : MonoBehaviour
             return;
         }
 
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            Debug.LogError("Patrol points are not set!");
+            return;
+        }
+
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
         if (isChasing)
@@ -58,28 +64,31 @@ public class MonsterMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
         }
-
     }
 
     private void Patrol()
     {
-        if (patrolDestination == 0)
+        if (patrolPoints.Length == 0)
         {
-            MoveTowardsPatrolPoint(patrolPoints[0]);
-            if (Vector2.Distance(transform.position, patrolPoints[0].position) < 0.2f)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-                patrolDestination = 1;
-            }
+            Debug.LogError("No patrol points set for monster!");
+            return;
         }
-        else if (patrolDestination == 1)
+
+        // Ensure patrolDestination is within bounds
+        if (patrolDestination < 0 || patrolDestination >= patrolPoints.Length)
         {
-            MoveTowardsPatrolPoint(patrolPoints[1]);
-            if (Vector2.Distance(transform.position, patrolPoints[1].position) < 0.2f)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                patrolDestination = 0;
-            }
+            Debug.LogError("Patrol destination index out of bounds!");
+            patrolDestination = 0; // Reset to a valid index
+        }
+
+        Transform targetPatrolPoint = patrolPoints[patrolDestination];
+        MoveTowardsPatrolPoint(targetPatrolPoint);
+
+        if (Vector2.Distance(transform.position, targetPatrolPoint.position) < 0.2f)
+        {
+            // Reverse direction by switching to the next patrol point
+            patrolDestination = (patrolDestination + 1) % patrolPoints.Length;
+            transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1); // Flip the monster
         }
     }
 
