@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
+    public GameObject victoryPanel;
 
-        private void Update()
+    private void Update()
     {
-        if (gameOverUI != null)
+        if (gameOverUI != null && victoryPanel != null)
         {
-            if (gameOverUI.activeInHierarchy)
+            if (gameOverUI.activeInHierarchy || victoryPanel.activeInHierarchy)
             {
                 // Removed cursor lock and visibility settings
             }
@@ -27,6 +28,14 @@ public class GameManager : MonoBehaviour
         if (gameOverUI != null)
         {
             gameOverUI.SetActive(true);
+        }
+    }
+
+    public void Victory()
+    {
+        if (victoryPanel != null)
+        {
+            victoryPanel.SetActive(true);
         }
     }
 

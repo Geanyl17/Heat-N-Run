@@ -14,22 +14,28 @@ public class Bullet : MonoBehaviour
     {
         rb.velocity = transform.right * speed;
         Destroy(gameObject, lifetime);
-        
     }
 
     // Update is called once per frame
-    void OnTriggerEnter2D (Collider2D hitInfo)
+    void OnTriggerEnter2D(Collider2D hitInfo)
+{
+    Debug.Log("Bullet hit something!");
+    Enemy enemy = hitInfo.GetComponent<Enemy>();
+    if (enemy != null)
     {
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage);
-        }
+        Debug.Log("Bullet hit an enemy!");
+        enemy.TakeDamage(damage);
         Destroy(gameObject);
-
-
-
+        return;
     }
 
+    BossEnemy Boss = hitInfo.GetComponent<BossEnemy>();
+    if (Boss != null)
+    {
+        Debug.Log("Bullet hit the boss!");
+        Boss.TakeDamage(damage);
+        Destroy(gameObject);
+    }
+}
 
 }

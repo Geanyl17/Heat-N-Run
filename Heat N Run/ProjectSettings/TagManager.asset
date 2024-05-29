@@ -9,6 +9,7 @@ TagManager:
   - BackGround
   - BreakableRock
   - OneWayPlatform
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
