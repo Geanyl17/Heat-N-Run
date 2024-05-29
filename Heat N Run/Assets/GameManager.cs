@@ -6,52 +6,50 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(gameOverUI.activeInHierarchy)
+        if (gameOverUI != null)
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            if (gameOverUI.activeInHierarchy)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
-        else
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        
     }
 
     public void GameOver()
     {
-        gameOverUI.SetActive(true);
-
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true);
+        }
     }
 
-    public void restart()
+    public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void mainMenu()
+    public void MainMenu()
     {
         SceneManager.LoadScene("Main Menu");
     }
 
-    public void quit()
+    public void Quit()
     {
         Application.Quit();
     }
-
-
-
-
-
 }
